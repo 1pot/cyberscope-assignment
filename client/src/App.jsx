@@ -7,14 +7,14 @@ const CoinDetailPage = lazy(() => import('./pages/coin-detail-page/index'))
 const App = () => {
     return (
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/coins" />
-              </Route>
-                <Route exact path="/coins" component={CoinListPage} />
-                <Route path="/coin/:id" component={CoinDetailPage} />
-            </Switch>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                    <Route exact path="/">
+                        <Redirect to="/coins" />
+                    </Route>
+                    <Route exact path="/coins" component={CoinListPage} />
+                    <Route path="/coin/:id" component={CoinDetailPage} />
+                </Switch>
             </Suspense>
         </Router>
     )

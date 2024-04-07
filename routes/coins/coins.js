@@ -44,7 +44,6 @@ router.get("/coins", async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("error", error);
     console.error("Error fetching data:", error);
     res.status(500).json({ success: false, error: "Internal server error" });
   }

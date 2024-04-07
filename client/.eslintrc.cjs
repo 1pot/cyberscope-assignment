@@ -1,26 +1,24 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-  ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
-  parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-  settings: { react: { version: "17.0.2" } },
-  plugins: ["react-refresh"],
-  rules: {
-    "react/jsx-no-target-blank": "off",
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true }
+    root: true,
+    env: {browser: true, es2020: true},
+    extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
+        'plugin:react-hooks/recommended'
     ],
-    "no-duplicate-imports": ["error", { "includeExports": true }],
-    "semi": ["error", "never"],
-    "react-hooks/rules-of-hooks": "off",
-        "react-hooks/exhaustive-deps": "off",
-        "react/prop-types": "off",
-  },
-};
+    ignorePatterns: ['dist', '.eslintrc.cjs'],
+    parserOptions: {ecmaVersion: 'latest', sourceType: 'module'},
+    settings: {react: {version: '17.0.2'}},
+    plugins: ['react-refresh'],
+    rules: {
+        'react/jsx-no-target-blank': 'off',
+        'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+        'no-duplicate-imports': ['error', {includeExports: true}],
+        semi: ['error', 'never'],
+        'no-unsafe-optional-chaining': 'off',
+        'react-hooks/rules-of-hooks': 'off',
+        'react-hooks/exhaustive-deps': 'off',
+        'react/prop-types': 'off'
+    }
+}

@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import CoinDetail from '../../components/coin-detail'
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
+import LoadingSpinner from '../../components/loading-spinner'
 
 const CoinDetailPage = () => {
     const [coin, setCoin] = useState()
@@ -22,7 +23,7 @@ const CoinDetailPage = () => {
         fetchCoin()
     }, [])
 
-    return coin ? <CoinDetail coin={coin} /> : <div>Loading...</div>
+    return coin ? <CoinDetail coin={coin} /> : <LoadingSpinner />
 }
 
 export default CoinDetailPage

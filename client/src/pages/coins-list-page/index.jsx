@@ -1,6 +1,7 @@
 import CoinListTable from '../../components/coin-list-table'
 import {useState, useEffect} from 'react'
 import {Button, PaginationContainer, Container} from './styles'
+import LoadingSpinner from '../../components/loading-spinner'
 import axios from 'axios'
 
 const CoinListPage = () => {
@@ -28,7 +29,7 @@ const CoinListPage = () => {
         fetchCoins()
     }, [currentPage])
 
-    return coins ? (
+    return coins.length > 0 ? (
         <Container>
             <CoinListTable coins={coins} />
             <PaginationContainer>
@@ -37,7 +38,7 @@ const CoinListPage = () => {
             </PaginationContainer>
         </Container>
     ) : (
-        <div>Loading...</div>
+        <LoadingSpinner />
     )
 }
 

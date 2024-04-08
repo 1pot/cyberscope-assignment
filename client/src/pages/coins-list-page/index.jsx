@@ -33,7 +33,12 @@ const CoinListPage = () => {
         <Container>
             <CoinListTable coins={coins} />
             <PaginationContainer>
-                <Button onClick={() => handlePageChange(currentPage - 1)}>Previous</Button>
+                <Button
+                    disabled={currentPage === 1}
+                    onClick={() => handlePageChange(currentPage - 1)}
+                >
+                    Previous
+                </Button>
                 <Button onClick={() => handlePageChange(currentPage + 1)}>Next</Button>
             </PaginationContainer>
         </Container>

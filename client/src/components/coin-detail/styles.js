@@ -49,8 +49,24 @@ export const Box = styled.div`
     }
 `
 
-export const Text = styled.p`
+const shouldForwardProp = (prop) => {
+    // Return true to forward all props except 'isnegative'
+    if (prop === 'isnegative') {
+        return false
+    }
+    // Otherwise, return true to forward the prop
+    return true
+}
+
+// Define the Text component with the filtered prop
+export const Text = styled.p.withConfig({
+    shouldForwardProp
+})`
     font-size: 0.875rem;
-    color: #4a5568;
+    color: ${(props) => (props.pending ? '#4a5568' : props.negative ? '#F6465D' : '#0ECB81')};
     word-wrap: break-word;
+`
+
+export const Description = styled(Text)`
+    color: #4a5568;
 `

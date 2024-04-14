@@ -7,18 +7,30 @@ import {
     Box,
     DescriptionCard,
     Label,
-    Text
+    Text,
+    Description
 } from './styles'
+import {sanitizedCoin} from '../../utils/utils'
+
+const PriceText = ({price}) => {
+    // Check if the price is a nevative number
+    const isNegative = typeof price === 'number' && price < 0
+    const isPending = price === 'Pending...'
+
+    return (
+        <Text negative={isNegative} pending={isPending}>
+            {isPending ? '' : '$'}
+            {price}
+        </Text>
+    )
+}
 
 const CoinDetail = ({coin}) => {
-    const {day, week, twoWeeks, month, twoMonths, twoHundredDays, year} =
-        coin?.marketData?.priceChanges
-    const {currentPrice, highestPrice24, lowestPrice24} = coin?.marketData
-
+    const validatedCoin = sanitizedCoin(coin)
     return (
         <Card>
             <CardHeader>
-                <Heading>{coin?.name}</Heading>
+                <Heading>{validatedCoin?.name}</Heading>
             </CardHeader>
             <CardBody>
                 <Stack>
@@ -27,51 +39,51 @@ const CoinDetail = ({coin}) => {
                     </CardHeader>
                     <Box>
                         <Label>Current Price:</Label>
-                        <Text>{currentPrice}</Text>
+                        <PriceText price={validatedCoin?.currentPrice} />
                     </Box>
                     <Box>
                         <Label>Price Change (24h):</Label>
-                        <Text>{day}</Text>
+                        <PriceText price={validatedCoin?.day} />
                     </Box>
                     <Box>
                         <Label>Price Change (1W):</Label>
-                        <Text>{week}</Text>
+                        <PriceText price={validatedCoin?.week} />
                     </Box>
                     <Box>
                         <Label>Price Change (2W):</Label>
-                        <Text>{twoWeeks}</Text>
+                        <PriceText price={validatedCoin?.twoWeeks} />
                     </Box>
                     <Box>
                         <Label>Price Change (1M):</Label>
-                        <Text>{month}</Text>
+                        <PriceText price={validatedCoin?.month} />
                     </Box>
                     <Box>
                         <Label>Price Change (2M):</Label>
-                        <Text>{twoMonths}</Text>
+                        <PriceText price={validatedCoin?.twoMonths} />
                     </Box>
                     <Box>
                         <Label>Price Change (200D):</Label>
-                        <Text>{twoHundredDays}</Text>
+                        <PriceText price={validatedCoin?.twoHundredDays} />
                     </Box>
                     <Box>
                         <Label>Price Change (1Y):</Label>
-                        <Text>{year}</Text>
+                        <PriceText price={validatedCoin?.year} />
                     </Box>
                     <Box>
                         <Label>Highest Price (24H):</Label>
-                        <Text>{highestPrice24}</Text>
+                        <PriceText price={validatedCoin?.highestPrice24} />
                     </Box>
                     <Box>
                         <Label>Lowest Price (24H):</Label>
-                        <Text>{lowestPrice24}</Text>
+                        <PriceText price={validatedCoin?.lowestPrice24} />
                     </Box>
                 </Stack>
             </CardBody>
             <DescriptionCard>
                 <CardHeader>
-                    <Heading>About {coin?.name}</Heading>
+                    <Heading>About {validatedCoin?.name}</Heading>
                 </CardHeader>
-                <Text>{coin?.description}</Text>
+                <Description>{validatedCoin?.description}</Description>
             </DescriptionCard>
         </Card>
     )

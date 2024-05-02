@@ -12,21 +12,23 @@ import {
 } from './styles'
 import {sanitizedCoin} from '../../utils/utils'
 
-const PriceText = ({price}) => {
+const PriceText = ({price, symbol}) => {
     // Check if the price is a nevative number
     const isNegative = typeof price === 'number' && price < 0
-    const isPending = price === 'Pending...'
+    const isPending = typeof price === 'string' && price === 'Pending...'
 
     return (
-        <Text negative={isNegative} pending={isPending}>
-            {isPending ? '' : '$'}
+        <Text negative={!!isNegative} pending={!!isPending} symbol={symbol}>
+            {symbol && !isPending && '$ '}
             {price}
+            {!symbol && !isPending && '%'}
         </Text>
     )
 }
 
 const CoinDetail = ({coin}) => {
     const validatedCoin = sanitizedCoin(coin)
+
     return (
         <Card>
             <CardHeader>
@@ -39,11 +41,11 @@ const CoinDetail = ({coin}) => {
                     </CardHeader>
                     <Box>
                         <Label>Current Price:</Label>
-                        <PriceText price={validatedCoin?.currentPrice} />
+                        <PriceText price={validatedCoin?.currentPrice} symbol={true} />
                     </Box>
                     <Box>
                         <Label>Price Change (24h):</Label>
-                        <PriceText price={validatedCoin?.day} />
+                        <PriceText price={validatedCoin?.day} symbol={true} />
                     </Box>
                     <Box>
                         <Label>Price Change (1W):</Label>
@@ -71,11 +73,11 @@ const CoinDetail = ({coin}) => {
                     </Box>
                     <Box>
                         <Label>Highest Price (24H):</Label>
-                        <PriceText price={validatedCoin?.highestPrice24} />
+                        <PriceText price={validatedCoin?.highestPrice24} symbol={true} />
                     </Box>
                     <Box>
                         <Label>Lowest Price (24H):</Label>
-                        <PriceText price={validatedCoin?.lowestPrice24} />
+                        <PriceText price={validatedCoin?.lowestPrice24} symbol={true} />
                     </Box>
                 </Stack>
             </CardBody>

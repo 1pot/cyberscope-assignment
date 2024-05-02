@@ -51,7 +51,7 @@ export const Box = styled.div`
 
 const shouldForwardProp = (prop) => {
     // Return true to forward all props except 'isnegative'
-    if (prop === 'isnegative') {
+    if (prop === 'negative' || prop === 'pending') {
         return false
     }
     // Otherwise, return true to forward the prop
@@ -65,8 +65,10 @@ export const Text = styled.p.withConfig({
     font-size: 0.875rem;
     color: ${(props) => (props.pending ? '#4a5568' : props.negative ? '#F6465D' : '#0ECB81')};
     word-wrap: break-word;
+    font-weight: bold;
 `
 
 export const Description = styled(Text)`
     color: #4a5568;
+    font-weight: normal;
 `
